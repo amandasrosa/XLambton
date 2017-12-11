@@ -33,6 +33,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:layout_weight="1"
+            android:src="@drawable/secret_agent" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
