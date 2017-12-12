@@ -115,7 +115,7 @@ public class AgentDAO extends SQLiteOpenHelper {
         String sql = "SELECT * FROM Agent;";
 
         Cursor c = db.rawQuery(sql, null);
-        List<Agent> agentList = new ArrayList<Agent>();
+        List<Agent> agentList = new ArrayList<>();
 
         while (c.moveToNext()) {
             Agent agent = new Agent();
@@ -129,7 +129,8 @@ public class AgentDAO extends SQLiteOpenHelper {
                 agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
                 agent.setAddress(c.getString(c.getColumnIndex("address")));
                 byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
-                agent.setPhoto(BitmapFactory.decodeByteArray(bytes, 0 , bytes.length));
+                agent.setPhoto(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                agentList.add(agent);
             }
         }
         c.close();

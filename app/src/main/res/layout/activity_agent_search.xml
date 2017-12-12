@@ -13,6 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Type the agent's name"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:lines="1"
             android:layout_weight="1"/>
         <Button
             android:id="@+id/agent_search_button_search"
