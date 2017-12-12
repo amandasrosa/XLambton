@@ -9,7 +9,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="Login"
-            android:inputType="textPassword"
             android:textSize="20sp"
             android:textAlignment="center" />
         <EditText
@@ -25,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:hint="Password"
+            android:inputType="textPassword"
             android:textAlignment="center"/>
         <Button
             android:id="@+id/login_submit"

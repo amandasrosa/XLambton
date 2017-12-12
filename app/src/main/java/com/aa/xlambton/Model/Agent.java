@@ -2,6 +2,7 @@ package com.aa.xlambton.Model;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,8 @@ import java.util.List;
  * Created by Amanda on 11/12/2017.
  */
 
-public class Agent {
+public class Agent implements Serializable {
+
     private int id;
     private String name;
     private String level;
