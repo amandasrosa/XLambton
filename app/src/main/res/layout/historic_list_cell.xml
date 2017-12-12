@@ -3,7 +3,9 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="1dp">
+    android:padding="1dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
 
     <TextView
         android:id="@+id/historic_cell_mission"
@@ -16,8 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:text="Level:"
-        android:layout_marginTop="10dp"/>
+        android:text="Level:"/>
     <TextView
         android:id="@+id/historic_cell_status"
         android:layout_width="match_parent"
