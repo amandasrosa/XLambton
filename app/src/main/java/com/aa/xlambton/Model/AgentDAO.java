@@ -66,7 +66,7 @@ public class AgentDAO extends SQLiteOpenHelper {
         while (c.moveToNext()) {
             Agent agent = new Agent();
 
-            agent.setId(c.getInt(c.getColumnIndex("id")));
+            agent.setId(c.getLong(c.getColumnIndex("id")));
             agent.setName(c.getString(c.getColumnIndex("name")));
             agent.setLevel(c.getString(c.getColumnIndex("agency")));
             agent.setWebsite(c.getString(c.getColumnIndex("website")));
@@ -81,6 +81,13 @@ public class AgentDAO extends SQLiteOpenHelper {
         c.close();
 
         return agentList;
+    }
+
+    public void dbDelete (Agent agent) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String[] param = {agent.getId().toString()};
+        db.delete("Agent", "id = ?", param);
     }
 
 }

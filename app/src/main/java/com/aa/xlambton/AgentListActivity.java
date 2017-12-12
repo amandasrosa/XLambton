@@ -3,6 +3,7 @@ package com.aa.xlambton;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.aa.xlambton.Model.Agent;
 import com.aa.xlambton.Model.AgentDAO;
@@ -26,6 +28,7 @@ public class AgentListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_agent_list);
 
         agentsList = (ListView)findViewById(R.id.agent_list);
+        registerForContextMenu(agentsList);
 
         agentsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -61,6 +64,31 @@ public class AgentListActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_back, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        final Agent agent = (Agent) agentsList.getItemAtPosition(info.position);
+
+        MenuItem delete = menu.add("Delete");
+
+        delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AgentDAO dao = new AgentDAO(AgentListActivity.this);
+                dao.dbDelete(agent);
+                dao.close();
+
+                Toast.makeText(AgentListActivity.this,"Delete agent " + agent.getName(), Toast.LENGTH_SHORT).show();
+
+                loadAgentsList();
+                return false;
+            }
+        });
+
+        super.onCreateContextMenu(menu,v,menuInfo);
     }
 
     @Override

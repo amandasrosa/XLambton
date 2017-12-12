@@ -10,7 +10,7 @@ public class Mission {
 
     private int id;
     private String name;
-    private Date date;
+    private String date;
     private String status;
 
     public int getId() {
@@ -29,11 +29,11 @@ public class Mission {
         this.name = name;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

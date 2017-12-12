@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Agent implements Serializable {
 
-    private int id;
+    private Long id;
     private String name;
     private String level;
     private String agency;
@@ -23,11 +23,11 @@ public class Agent implements Serializable {
     private Bitmap photo;
     private List<Mission> missions = new ArrayList<Mission>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
