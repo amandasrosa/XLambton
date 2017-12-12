@@ -20,7 +20,8 @@
         <activity android:name=".MenuActivity" />
         <activity android:name=".AgentListActivity" />
         <activity android:name=".AgentProfileActivity" />
-        <activity android:name=".MissionHistoricActivity"></activity>
+        <activity android:name=".MissionHistoricActivity" />
+        <activity android:name=".AgentSearchActivity"></activity>
     </application>
 
 </manifest>
