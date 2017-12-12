@@ -10,49 +10,154 @@
     <ImageView
         android:id="@+id/agent_profile_photo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:scaleType="centerInside"
-        android:src="@drawable/secret_agent" />
+        android:src="@drawable/secret_agent"
+        android:layout_weight="1"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <EditText
-            android:id="@+id/agent_profile_name"
+        android:orientation="vertical">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"/>
-        <EditText
-            android:id="@+id/agent_profile_level"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Name: "
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/agent_profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Name"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Level"/>
-        <EditText
-            android:id="@+id/agent_profile_agency"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Level: "
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/agent_profile_level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Level"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Agency"/>
-        <EditText
-            android:id="@+id/agent_profile_website"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Agency: "
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/agent_profile_agency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Agency"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Website"/>
-        <EditText
-            android:id="@+id/agent_profile_country"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Website: "
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/agent_profile_website"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Website"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Country"/>
-        <EditText
-            android:id="@+id/agent_profile_phone_number"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Country: "
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/agent_profile_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Country"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"/>
-        <EditText
-            android:id="@+id/agent_profile_address"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number: "
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/agent_profile_phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Phone Number"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Address"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Address: "
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/agent_profile_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Address"
+                android:textSize="16sp"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="200dp"
@@ -84,7 +189,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp">
         <Button
             android:id="@+id/agent_profile_button_info"
@@ -104,6 +208,4 @@
             android:layout_height="wrap_content"
             android:background="@drawable/ic_camera_alt_black_24dp"/>
     </LinearLayout>
-
-
 </LinearLayout>
