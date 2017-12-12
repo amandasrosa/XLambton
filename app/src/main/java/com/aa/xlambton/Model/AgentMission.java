@@ -5,15 +5,15 @@ package com.aa.xlambton.Model;
  */
 
 public class AgentMission {
-    private int id;
+    private Long id;
     private Agent agent;
     private Mission mission;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

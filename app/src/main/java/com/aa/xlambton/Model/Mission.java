@@ -1,6 +1,5 @@
 package com.aa.xlambton.Model;
 
-import java.util.Date;
 
 /**
  * Created by Amanda on 11/12/2017.
@@ -8,16 +7,16 @@ import java.util.Date;
 
 public class Mission {
 
-    private int id;
+    private Long id;
     private String name;
     private String date;
     private String status;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -33,7 +32,7 @@ public class Mission {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDateMission(String date) {
         this.date = date;
     }
 

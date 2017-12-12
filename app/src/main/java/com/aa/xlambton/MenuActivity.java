@@ -9,12 +9,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.aa.xlambton.Model.Agent;
+import com.aa.xlambton.Model.AgentDAO;
+
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        try {
+            loadData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         Button btnAgentList = (Button)findViewById(R.id.menu_button_agent_list);
         Button btnAgentSearch = (Button)findViewById(R.id.menu_button_agent_search);
@@ -61,5 +74,18 @@ public class MenuActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void loadData() throws ParseException {
+        AgentDAO dao = new AgentDAO(this);
+
+        List<Agent> agents = new ArrayList<Agent>();
+        agents = dao.dbSearch();
+
+        if (agents.isEmpty() || agents == null) {
+            CreateObjHelper.createObjs(this);
+        }
+
+        dao.close();
     }
 }

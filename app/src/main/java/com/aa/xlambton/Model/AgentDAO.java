@@ -83,6 +83,59 @@ public class AgentDAO extends SQLiteOpenHelper {
         return agentList;
     }
 
+    public Agent dbSearchById (Long id) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sql = "SELECT * FROM Agent;";
+
+        Cursor c = db.rawQuery(sql, null);
+
+        Agent agent = new Agent();
+        while (c.moveToNext()) {
+
+            if (c.getLong(c.getColumnIndex("id")) == id) {
+                agent.setId(c.getLong(c.getColumnIndex("id")));
+                agent.setName(c.getString(c.getColumnIndex("name")));
+                agent.setLevel(c.getString(c.getColumnIndex("agency")));
+                agent.setWebsite(c.getString(c.getColumnIndex("website")));
+                agent.setCountry(c.getString(c.getColumnIndex("country")));
+                agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
+                agent.setAddress(c.getString(c.getColumnIndex("address")));
+                byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
+                agent.setPhoto(BitmapFactory.decodeByteArray(bytes, 0 , bytes.length));
+            }
+        }
+        c.close();
+        return agent;
+    }
+
+    public List<Agent> dbSearchByName (String name) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sql = "SELECT * FROM Agent;";
+
+        Cursor c = db.rawQuery(sql, null);
+        List<Agent> agentList = new ArrayList<Agent>();
+
+        while (c.moveToNext()) {
+            Agent agent = new Agent();
+
+            if (c.getString(c.getColumnIndex("name")).contains(name)) {
+                agent.setId(c.getLong(c.getColumnIndex("id")));
+                agent.setName(c.getString(c.getColumnIndex("name")));
+                agent.setLevel(c.getString(c.getColumnIndex("agency")));
+                agent.setWebsite(c.getString(c.getColumnIndex("website")));
+                agent.setCountry(c.getString(c.getColumnIndex("country")));
+                agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
+                agent.setAddress(c.getString(c.getColumnIndex("address")));
+                byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
+                agent.setPhoto(BitmapFactory.decodeByteArray(bytes, 0 , bytes.length));
+            }
+        }
+        c.close();
+        return agentList;
+    }
+
     public void dbDelete (Agent agent) {
         SQLiteDatabase db = getWritableDatabase();
 

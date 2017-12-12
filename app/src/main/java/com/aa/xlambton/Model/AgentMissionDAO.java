@@ -36,13 +36,13 @@ public class AgentMissionDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues agentMissionData = new ContentValues();
-        //agentData.put("description", product.getDescription());
-
+        agentMissionData.put("agent_id", agentMission.getAgent().getId());
+        agentMissionData.put("mission_id", agentMission.getMission().getId());
 
         db.insert("AgentMission", null, agentMissionData);
     }
 
-    public List<AgentMission> dbSearch() {
+    public List<AgentMission> dbSearch(Context context) {
         SQLiteDatabase db = getReadableDatabase();
 
         String sql = "SELECT * FROM AgentMission;";
@@ -53,9 +53,18 @@ public class AgentMissionDAO extends SQLiteOpenHelper {
         while (c.moveToNext()) {
             AgentMission agentMission = new AgentMission();
 
-            agentMission.setId(c.getInt(c.getColumnIndex("id")));
-            //agentMission.setAgent(c.getInt(c.getColumnIndex("agent_id")));
-            //agentMission.setMission(c.getInt(c.getColumnIndex("mission_id")));
+            AgentDAO daoA = new AgentDAO(context);
+            Long agentId = c.getLong(c.getColumnIndex("agent_id"));
+            Agent agent = daoA.dbSearchById(agentId);
+            daoA.close();
+            MissionDAO daoM = new MissionDAO(context);
+            Long missionId = c.getLong(c.getColumnIndex("mission_id"));
+            Mission mission = daoM.dbSearchById(missionId);
+            daoM.close();
+
+            agentMission.setId(c.getLong(c.getColumnIndex("id")));
+            agentMission.setAgent(agent);
+            agentMission.setMission(mission);
 
             agentMissionList.add(agentMission);
         }
