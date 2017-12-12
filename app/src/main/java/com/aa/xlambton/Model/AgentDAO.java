@@ -68,7 +68,8 @@ public class AgentDAO extends SQLiteOpenHelper {
 
             agent.setId(c.getLong(c.getColumnIndex("id")));
             agent.setName(c.getString(c.getColumnIndex("name")));
-            agent.setLevel(c.getString(c.getColumnIndex("agency")));
+            agent.setLevel(c.getString(c.getColumnIndex("level")));
+            agent.setAgency(c.getString(c.getColumnIndex("agency")));
             agent.setWebsite(c.getString(c.getColumnIndex("website")));
             agent.setCountry(c.getString(c.getColumnIndex("country")));
             agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
@@ -96,7 +97,8 @@ public class AgentDAO extends SQLiteOpenHelper {
             if (c.getLong(c.getColumnIndex("id")) == id) {
                 agent.setId(c.getLong(c.getColumnIndex("id")));
                 agent.setName(c.getString(c.getColumnIndex("name")));
-                agent.setLevel(c.getString(c.getColumnIndex("agency")));
+                agent.setLevel(c.getString(c.getColumnIndex("level")));
+                agent.setAgency(c.getString(c.getColumnIndex("agency")));
                 agent.setWebsite(c.getString(c.getColumnIndex("website")));
                 agent.setCountry(c.getString(c.getColumnIndex("country")));
                 agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
@@ -123,7 +125,8 @@ public class AgentDAO extends SQLiteOpenHelper {
             if (c.getString(c.getColumnIndex("name")).contains(name)) {
                 agent.setId(c.getLong(c.getColumnIndex("id")));
                 agent.setName(c.getString(c.getColumnIndex("name")));
-                agent.setLevel(c.getString(c.getColumnIndex("agency")));
+                agent.setLevel(c.getString(c.getColumnIndex("level")));
+                agent.setAgency(c.getString(c.getColumnIndex("agency")));
                 agent.setWebsite(c.getString(c.getColumnIndex("website")));
                 agent.setCountry(c.getString(c.getColumnIndex("country")));
                 agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));

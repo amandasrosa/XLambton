@@ -31,6 +31,10 @@ public class AgentProfileActivity extends AppCompatActivity {
 
         final Agent agent = (Agent)getIntent().getSerializableExtra("agent");
 
+        if (agent != null) {
+            CreateObjHelper.fillForm(this, agent);
+        }
+
         Button btnWebsite = (Button)findViewById(R.id.agent_profile_button_website);
         Button btnCall = (Button)findViewById(R.id.agent_profile_button_call);
         Button btnLocation = (Button)findViewById(R.id.agent_profile_button_location);

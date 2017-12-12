@@ -1,10 +1,11 @@
 package com.aa.xlambton;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aa.xlambton.Model.Agent;
 import com.aa.xlambton.Model.AgentDAO;
@@ -13,11 +14,7 @@ import com.aa.xlambton.Model.AgentMissionDAO;
 import com.aa.xlambton.Model.Mission;
 import com.aa.xlambton.Model.MissionDAO;
 
-import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Amanda on 11/12/2017.
@@ -69,7 +66,6 @@ public class CreateObjHelper {
         Bitmap lowdefbitmap2 = Bitmap.createScaledBitmap(bitmap2,300,300,true);
         Bitmap bitmap3 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent3) ;
         Bitmap lowdefbitmap3 = Bitmap.createScaledBitmap(bitmap3,300,300,true);
-
         Bitmap bitmap4 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent4) ;
         Bitmap lowdefbitmap4 = Bitmap.createScaledBitmap(bitmap4,300,300,true);
         Bitmap bitmap5 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent5) ;
@@ -195,5 +191,28 @@ public class CreateObjHelper {
         daoAgMi.dbInsert(agm12);
 
         daoAgMi.close();
+    }
+
+    public static void fillForm(AgentProfileActivity activity, Agent agent) {
+
+        ImageView fieldPhoto = (ImageView)activity.findViewById(R.id.agent_profile_photo);
+        TextView fieldName = (TextView)activity.findViewById(R.id.agent_profile_name);
+        TextView fieldLevel = (TextView)activity.findViewById(R.id.agent_profile_level);
+        TextView fieldAgency = (TextView)activity.findViewById(R.id.agent_profile_agency);
+        TextView fieldSite = (TextView)activity.findViewById(R.id.agent_profile_website);
+        TextView fieldCountry = (TextView)activity.findViewById(R.id.agent_profile_country);
+        TextView fieldPhone = (TextView)activity.findViewById(R.id.agent_profile_phone_number);
+        TextView fieldAddress = (TextView)activity.findViewById(R.id.agent_profile_address);
+
+        fieldPhoto.setImageBitmap(agent.getPhoto());
+        fieldPhoto.setScaleType(ImageView.ScaleType.FIT_XY);
+        fieldName.setText(agent.getName());
+        fieldLevel.setText(agent.getLevel());
+        fieldAgency.setText(agent.getAgency());
+        fieldSite.setText(agent.getWebsite());
+        fieldCountry.setText(agent.getCountry());
+        fieldPhone.setText(agent.getPhoneNumber());
+        fieldAddress.setText(agent.getAddress());
+
     }
 }

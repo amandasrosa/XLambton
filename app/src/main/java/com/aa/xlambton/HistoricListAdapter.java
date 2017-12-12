@@ -34,13 +34,13 @@ public class HistoricListAdapter extends ArrayAdapter {
         if (mission != null) {
             TextView missionName = (TextView) view.findViewById(R.id.historic_cell_mission);
             TextView date = (TextView) view.findViewById(R.id.historic_cell_date);
-            TextView status = (TextView) view.findViewById(R.id.historic_cell_date);
+            TextView status = (TextView) view.findViewById(R.id.historic_cell_status);
 
             if (missionName != null) {
                 missionName.setText(mission.getName());
             }
             if (date != null) {
-                date.setText(new SimpleDateFormat("dd/MM/yyyy").format(mission.getDate()));
+                date.setText(mission.getDate());
             }
             if (status != null) {
                 status.setText(mission.getStatus());

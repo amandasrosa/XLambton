@@ -20,7 +20,7 @@ public class Agent implements Serializable {
     private String country;
     private String phoneNumber;
     private String address;
-    private Bitmap photo;
+    private transient Bitmap photo;
     private List<Mission> missions = new ArrayList<Mission>();
 
     public Long getId() {
