@@ -5,6 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.aa.xlambton.Model.Mission;
+import com.aa.xlambton.Model.MissionDAO;
+
+import java.util.List;
 
 public class MissionHistoricActivity extends AppCompatActivity {
 
@@ -12,6 +18,14 @@ public class MissionHistoricActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mission_historic);
+
+        MissionDAO dao = new MissionDAO(this);
+        List<Mission> missions = dao.dbSearch();
+        dao.close();
+
+        HistoricListAdapter adapter = new HistoricListAdapter(this, R.layout.activity_mission_historic, missions);
+        ListView missionList = (ListView) findViewById(R.id.historic_mission_list);
+        missionList.setAdapter(adapter);
     }
 
     @Override

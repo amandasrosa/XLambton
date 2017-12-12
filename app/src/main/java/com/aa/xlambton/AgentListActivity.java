@@ -9,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,20 +19,20 @@ import java.util.List;
 
 public class AgentListActivity extends AppCompatActivity {
 
-    private ListView agentsList;
+    private ListView agentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agent_list);
 
-        agentsList = (ListView)findViewById(R.id.agent_list);
-        registerForContextMenu(agentsList);
+        agentList = (ListView)findViewById(R.id.agent_list);
+        registerForContextMenu(agentList);
 
-        agentsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        agentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Agent agent = (Agent) agentsList.getItemAtPosition(position);
+                Agent agent = (Agent) agentList.getItemAtPosition(position);
 
                 Intent intent = new Intent(AgentListActivity.this, AgentProfileActivity.class);
                 intent.putExtra("agent", agent);
@@ -43,13 +42,12 @@ public class AgentListActivity extends AppCompatActivity {
     }
 
     private void loadAgentsList() {
-
         AgentDAO dao = new AgentDAO(this);
         List<Agent> agents = dao.dbSearch();
         dao.close();
 
-        ArrayAdapter<Agent> adapter = new ArrayAdapter<Agent>(this, android.R.layout.simple_list_item_1, agents);
-        agentsList.setAdapter(adapter);
+        AgentListAdapter adapter = new AgentListAdapter(this, R.layout.activity_agent_list, agents);
+        agentList.setAdapter(adapter);
     }
 
     @Override
@@ -70,7 +68,7 @@ public class AgentListActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        final Agent agent = (Agent) agentsList.getItemAtPosition(info.position);
+        final Agent agent = (Agent) agentList.getItemAtPosition(info.position);
 
         MenuItem delete = menu.add("Delete");
 
