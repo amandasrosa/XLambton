@@ -21,9 +21,6 @@ import java.io.File;
 
 public class AgentProfileActivity extends AppCompatActivity {
 
-    private static final int CAMERA_CODE = 990;
-    private String dirAppPhoto;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,19 +89,8 @@ public class AgentProfileActivity extends AppCompatActivity {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dirAppPhoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
-                File filePhoto = new File(dirAppPhoto);
-
-                if (filePhoto != null) {
-                    Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    intentCamera.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    Uri uri = FileProvider.getUriForFile(view.getContext(), BuildConfig.APPLICATION_ID, filePhoto);
-                    intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-
-                    if (intentCamera.resolveActivity(getPackageManager()) != null) {
-                        startActivityForResult(intentCamera, CAMERA_CODE);
-                    }
-                }
+                Intent intent = new Intent(AgentProfileActivity.this, MissionUpdateActivity.class);
+                startActivity(intent);
             }
         });
     }
