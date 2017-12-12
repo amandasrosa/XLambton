@@ -12,11 +12,11 @@
             android:textSize="20sp"
             android:textAlignment="center" />
         <EditText
-            android:id="@+id/login_name"
+            android:id="@+id/login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:hint="Name"
+            android:hint="Username"
             android:textAlignment="center"/>
         <EditText
             android:id="@+id/login_password"

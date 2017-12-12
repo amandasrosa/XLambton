@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Amanda on 11/12/2017.
  */
@@ -40,10 +43,29 @@ public class UserDAO extends SQLiteOpenHelper {
         db.insert("User", null, userData);
     }
 
+    public boolean checkIfUserExists(String username) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String sql = "SELECT * FROM User;";
+
+        ContentValues userData = new ContentValues();
+        userData.put("username", username);
+
+        Cursor c = db.rawQuery(sql, null);
+        boolean userExists = false;
+        while (c.moveToNext()) {
+            if (c.getString(c.getColumnIndex("username")).equals(username)) {
+                userExists = true;
+            }
+        }
+        c.close();
+        return userExists;
+    }
+
     public boolean checkUserNPass (String username, String password) {
         SQLiteDatabase db = getWritableDatabase();
 
-        String sql = "SELECT email, password FROM User";
+        String sql = "SELECT username, password FROM User";
 
         Cursor c = db.rawQuery(sql, null);
 
