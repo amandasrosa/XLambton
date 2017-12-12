@@ -19,7 +19,8 @@
         <activity android:name=".NewUserActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".AgentListActivity" />
-        <activity android:name=".AgentProfileActivity"></activity>
+        <activity android:name=".AgentProfileActivity" />
+        <activity android:name=".MissionHistoricActivity"></activity>
     </application>
 
 </manifest>
