@@ -21,7 +21,8 @@
         <activity android:name=".AgentListActivity" />
         <activity android:name=".AgentProfileActivity" />
         <activity android:name=".MissionHistoricActivity" />
-        <activity android:name=".AgentSearchActivity"></activity>
+        <activity android:name=".AgentSearchActivity" />
+        <activity android:name=".NewAgentActivity"></activity>
     </application>
 
 </manifest>
