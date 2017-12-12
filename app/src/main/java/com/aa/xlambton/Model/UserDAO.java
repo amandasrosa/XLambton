@@ -18,7 +18,7 @@ public class UserDAO extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE User (id INTEGER PRIMARY KEY, username TEXT NOT NULL, password TEXT NOT NULL)";
+        String sql = "CREATE TABLE IF NOT EXISTS User (id INTEGER PRIMARY KEY, username TEXT NOT NULL, password TEXT NOT NULL)";
         db.execSQL(sql);
     }
 

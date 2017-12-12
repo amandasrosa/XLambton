@@ -1,5 +1,7 @@
 package com.aa.xlambton.Model;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class Agent {
     private String country;
     private String phoneNumber;
     private String address;
+    private Bitmap photo;
     private List<Mission> missions = new ArrayList<Mission>();
 
     public int getId() {
@@ -80,6 +83,14 @@ public class Agent {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
     }
 
     public List<Mission> getMissions() {

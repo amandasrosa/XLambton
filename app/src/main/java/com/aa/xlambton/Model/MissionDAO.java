@@ -21,7 +21,7 @@ public class MissionDAO extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE Mission (id INTEGER PRIMARY KEY, name TEXT, date DATE, status TEXT)";
+        String sql = "CREATE TABLE IF NOT EXISTS Mission (id INTEGER PRIMARY KEY, name TEXT, date DATE, status TEXT)";
         db.execSQL(sql);
     }
 

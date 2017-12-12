@@ -6,7 +6,7 @@
     android:padding="1dp">
 
     <ImageView
-        android:id="@+id/list_cell_image"
+        android:id="@+id/list_cell_photo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@drawable/secret_agent"

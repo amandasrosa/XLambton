@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +23,8 @@ public class AgentDAO extends SQLiteOpenHelper {
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE Agent (id INTEGER PRIMARY KEY, name TEXT, level TEXT, agency TEXT, " +
-                "website TEXT, country TEXT, phoneNumber TEXT, address TEXT)";
+        String sql = "CREATE TABLE IF NOT EXISTS Agent (id INTEGER PRIMARY KEY, name TEXT, level TEXT, agency TEXT, " +
+                "website TEXT, country TEXT, phoneNumber TEXT, address TEXT, photo BLOB)";
         db.execSQL(sql);
     }
 
@@ -36,9 +39,18 @@ public class AgentDAO extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        ContentValues agentData = new ContentValues();
-        //agentData.put("description", product.getDescription());
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        agent.getPhoto().compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        byte[] bytes = bos.toByteArray();
 
+        ContentValues agentData = new ContentValues();
+        agentData.put("name", agent.getName());
+        agentData.put("agency", agent.getAgency());
+        agentData.put("website", agent.getWebsite());
+        agentData.put("country", agent.getCountry());
+        agentData.put("phoneNumber", agent.getPhoneNumber());
+        agentData.put("address", agent.getAddress());
+        agentData.put("photo", bytes);
 
         db.insert("Agent", null, agentData);
     }
@@ -61,6 +73,8 @@ public class AgentDAO extends SQLiteOpenHelper {
             agent.setCountry(c.getString(c.getColumnIndex("country")));
             agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
             agent.setAddress(c.getString(c.getColumnIndex("address")));
+            byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
+            agent.setPhoto(BitmapFactory.decodeByteArray(bytes, 0 , bytes.length));
 
             agentList.add(agent);
         }

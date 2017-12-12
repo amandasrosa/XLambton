@@ -22,7 +22,7 @@ public class MissionPhotoDAO extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String sql = "CREATE TABLE MissionPhoto (id INTEGER PRIMARY KEY, " +
+        String sql = "CREATE TABLE IF NOT EXISTS MissionPhoto (id INTEGER PRIMARY KEY, " +
                 "photoPath TEXT, mission INTEGER)";
         db.execSQL(sql);
     }
