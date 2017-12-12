@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".NewUserActivity" />
         <activity android:name=".MenuActivity" />
-        <activity android:name=".AgentListActivity"></activity>
+        <activity android:name=".AgentListActivity" />
+        <activity android:name=".AgentProfileActivity"></activity>
     </application>
 
 </manifest>
