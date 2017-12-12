@@ -1,66 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.aa.xlambton.MenuActivity">
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/secret_agent" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:scaleType="centerInside"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/secret_agent" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+         <Button
+             android:id="@+id/menu_button_agent_list"
+             android:layout_width="50dp"
+             android:layout_height="wrap_content"
+             android:background="@drawable/ic_list_black_24dp" />
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="50dp">
-            <Button
-                android:id="@+id/menu_button_agent_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Agent List"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="50dp">
-            <Button
-                android:id="@+id/menu_button_agent_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Agent Search"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="50dp">
-            <Button
-                android:id="@+id/menu_button_add_agent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add Agent"/>
-        </LinearLayout>
+            android:text="Agent List"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginVertical="1dp"/>
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/menu_button_agent_search"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_search_black_24dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agent Search"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginVertical="1dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center">
+        <Button
+            android:id="@+id/menu_button_add_agent"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_add_circle_outline_black_24dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Agent"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginVertical="1dp"/>
+    </LinearLayout>
+</LinearLayout>
