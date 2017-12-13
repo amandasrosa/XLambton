@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp">
 
     <ImageView
         android:id="@+id/new_agent_photo"
@@ -15,48 +17,70 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
         <EditText
             android:id="@+id/new_agent_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"/>
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:imeOptions="actionNext"
+            android:lines="1"/>
 
         <EditText
             android:id="@+id/new_agent_level"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Level"/>
+            android:hint="Level"
+            android:inputType="textCapWords"
+            android:imeOptions="actionNext"
+            android:lines="1"/>
 
         <EditText
             android:id="@+id/new_agent_agency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Agency"/>
+            android:hint="Agency"
+            android:inputType="textCapWords"
+            android:imeOptions="actionNext"
+            android:lines="1"/>
 
         <EditText
             android:id="@+id/new_agent_website"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Website"/>
+            android:hint="Website"
+            android:inputType="textUri"
+            android:imeOptions="actionNext"
+            android:lines="1"/>
 
         <EditText
             android:id="@+id/new_agent_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Country"/>
+            android:hint="Country"
+            android:inputType="textCapWords"
+            android:imeOptions="actionNext"
+            android:lines="1"/>
 
         <EditText
             android:id="@+id/new_agent_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"/>
+            android:hint="Phone Number"
+            android:inputType="number"
+            android:imeOptions="actionNext"
+            android:lines="1"/>
 
         <EditText
             android:id="@+id/new_agent_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Address"/>
+            android:hint="Address"
+            android:inputType="textCapWords"
+            android:imeOptions="actionDone"
+            android:lines="1"/>
 
         <Button
             android:id="@+id/new_agent_save"
