@@ -9,7 +9,8 @@
         android:id="@+id/list_cell_photo"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/select_image"
+        android:src="@drawable/select_image"
+        android:background="#00000000"
         android:scaleType="centerInside"
         android:layout_gravity="center_vertical"/>
 

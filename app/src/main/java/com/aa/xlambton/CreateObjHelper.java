@@ -211,7 +211,8 @@ public class CreateObjHelper {
         TextView fieldAddress = (TextView) activity.findViewById(R.id.agent_profile_address);
 
         fieldPhoto.setImageBitmap(BitmapHelper.getScaledBitmap(context, agent.getPhotoPath()));
-        fieldPhoto.setScaleType(ImageView.ScaleType.FIT_XY);
+        fieldPhoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        fieldPhoto.setAdjustViewBounds(true);
         fieldName.setText(agent.getName());
         fieldLevel.setText(agent.getLevel());
         fieldAgency.setText(agent.getAgency());
