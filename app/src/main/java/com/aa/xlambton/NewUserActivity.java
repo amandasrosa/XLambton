@@ -33,7 +33,7 @@ public class NewUserActivity extends AppCompatActivity {
                 } else {
                     User user = new User();
                     user.setUsername(username);
-                    user.setPassword(password);
+                    user.setPassword(MachineCypher.encryptMessage(password));
                     UserDAO dao = new UserDAO(NewUserActivity.this);
 
                     if (dao.checkIfUserExists(username)) {

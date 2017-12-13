@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     UserDAO dao = new UserDAO(LoginActivity.this);
 
-                    if (dao.checkUserNPass(username, password)) {
+                    if (dao.checkUserNPass(username, MachineCypher.encryptMessage(password))) {
                         Toast.makeText(LoginActivity.this, "Welcome " + username, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(intent);
