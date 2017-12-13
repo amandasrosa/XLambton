@@ -51,15 +51,16 @@ public class NewAgentActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Agent agent = CreateObjHelper.createNewAgent(NewAgentActivity.this, dirAppPhoto);
                 if (agent.getName().isEmpty() || agent.getPhotoPath().isEmpty()) {
-                    Toast.makeText(NewAgentActivity.this, "Insert a valid name and photo", Toast.LENGTH_LONG);
+                    Toast.makeText(NewAgentActivity.this, "Insert a valid name and photo", Toast.LENGTH_SHORT).show();
                 } else {
                     try {
                         AgentDAO dao = new AgentDAO(NewAgentActivity.this);
                         dao.dbInsert(agent);
-                        Toast.makeText(NewAgentActivity.this, "Agent saved", Toast.LENGTH_LONG);
+                        Toast.makeText(NewAgentActivity.this, "Agent saved", Toast.LENGTH_SHORT).show();
                         finish();
                     } catch (Exception e) {
-                        Toast.makeText(NewAgentActivity.this, "Error while saving agent", Toast.LENGTH_LONG);
+                        e.printStackTrace();
+                        Toast.makeText(NewAgentActivity.this, "Error while saving agent", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
