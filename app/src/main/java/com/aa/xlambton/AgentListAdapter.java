@@ -1,6 +1,8 @@
 package com.aa.xlambton;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -42,7 +44,10 @@ public class AgentListAdapter extends ArrayAdapter {
             TextView level = (TextView) view.findViewById(R.id.list_cell_level);
 
             if (photo != null) {
-                photo.setImageBitmap(agent.getPhoto());
+                Bitmap bitmap = BitmapFactory.decodeResource(view.getResources(), agent.getPhotoPath());
+                Bitmap lowdefbitmap = Bitmap.createScaledBitmap(bitmap,300,300,true);
+
+                photo.setImageBitmap(lowdefbitmap);
             }
             if (name != null) {
                 name.setText(agent.getName());

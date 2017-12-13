@@ -3,6 +3,8 @@ package com.aa.xlambton;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,17 +67,16 @@ public class CreateObjHelper {
 
         AgentDAO daoAgent = new AgentDAO(context);
 
-        Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent1) ;
-        Bitmap lowdefbitmap1 = Bitmap.createScaledBitmap(bitmap1,300,300,true);
-        Bitmap bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent2) ;
-        Bitmap lowdefbitmap2 = Bitmap.createScaledBitmap(bitmap2,300,300,true);
-        Bitmap bitmap3 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent3) ;
-        Bitmap lowdefbitmap3 = Bitmap.createScaledBitmap(bitmap3,300,300,true);
-        Bitmap bitmap4 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent4) ;
-        Bitmap lowdefbitmap4 = Bitmap.createScaledBitmap(bitmap4,300,300,true);
-        Bitmap bitmap5 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent5) ;
-        Bitmap lowdefbitmap5 = Bitmap.createScaledBitmap(bitmap5,300,300,true);
+        //Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent1) ;
+        //Bitmap lowdefbitmap1 = Bitmap.createScaledBitmap(bitmap1,300,300,true);
 
+        int photoAg1 = R.drawable.agent1;
+        int photoAg2 = R.drawable.agent2;
+        int photoAg3 = R.drawable.agent3;
+        int photoAg4 = R.drawable.agent4;
+        int photoAg5 = R.drawable.agent5;
+
+        System.out.println("photoag1 " + photoAg1);
         Agent ag1 = new Agent();
         ag1.setId(1L);
         ag1.setName("Olivia Brown");
@@ -85,7 +86,7 @@ public class CreateObjHelper {
         ag1.setCountry("France");
         ag1.setPhoneNumber("+16477209208");
         ag1.setAddress("6 Rue Dulac, Paris, France");
-        ag1.setPhoto(lowdefbitmap1);
+        ag1.setPhotoPath(photoAg1);
         daoAgent.dbInsert(ag1);
 
         Agent ag2 = new Agent();
@@ -97,7 +98,7 @@ public class CreateObjHelper {
         ag2.setCountry("Hungary");
         ag2.setPhoneNumber("+16490569211");
         ag2.setAddress("Szinyei Merse u. 32, Budapest, Hungary");
-        ag2.setPhoto(lowdefbitmap2);
+        ag2.setPhotoPath(photoAg2);
         daoAgent.dbInsert(ag2);
 
         Agent ag3 = new Agent();
@@ -109,7 +110,7 @@ public class CreateObjHelper {
         ag3.setCountry("Monaco");
         ag3.setPhoneNumber("+16490569211");
         ag3.setAddress("18 Rue Malbousquet, Monaco, Monaco");
-        ag3.setPhoto(lowdefbitmap3);
+        ag3.setPhotoPath(photoAg3);
         daoAgent.dbInsert(ag3);
 
         Agent ag4 = new Agent();
@@ -121,7 +122,7 @@ public class CreateObjHelper {
         ag4.setCountry("Turkey");
         ag4.setPhoneNumber("+1678670237");
         ag4.setAddress("Kabakulak Cami Sk. No:11, Istanbul, Turkey");
-        ag4.setPhoto(lowdefbitmap4);
+        ag4.setPhotoPath(photoAg4);
         daoAgent.dbInsert(ag4);
 
         Agent ag5 = new Agent();
@@ -133,7 +134,7 @@ public class CreateObjHelper {
         ag5.setCountry("Greece");
         ag5.setPhoneNumber("+163909730");
         ag5.setAddress("Pindaro 6, Athens, Greece");
-        ag5.setPhoto(lowdefbitmap5);
+        ag5.setPhotoPath(photoAg5);
         daoAgent.dbInsert(ag5);
 
         daoAgent.close();
@@ -203,7 +204,7 @@ public class CreateObjHelper {
         daoAgMi.close();
     }
 
-    public static void fillForm(AgentProfileActivity activity, Agent agent) {
+    public static void fillForm(Context context,AgentProfileActivity activity, Agent agent) {
 
         ImageView fieldPhoto = (ImageView)activity.findViewById(R.id.agent_profile_photo);
         TextView fieldName = (TextView)activity.findViewById(R.id.agent_profile_name);
@@ -214,7 +215,10 @@ public class CreateObjHelper {
         TextView fieldPhone = (TextView)activity.findViewById(R.id.agent_profile_phone_number);
         TextView fieldAddress = (TextView)activity.findViewById(R.id.agent_profile_address);
 
-        fieldPhoto.setImageBitmap(agent.getPhoto());
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), agent.getPhotoPath());
+        Bitmap lowdefbitmap = Bitmap.createScaledBitmap(bitmap,300,300,true);
+
+        fieldPhoto.setImageBitmap(lowdefbitmap);
         fieldPhoto.setScaleType(ImageView.ScaleType.FIT_XY);
         fieldName.setText(agent.getName());
         fieldLevel.setText(agent.getLevel());

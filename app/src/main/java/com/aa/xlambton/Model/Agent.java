@@ -1,7 +1,5 @@
 package com.aa.xlambton.Model;
 
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,8 @@ public class Agent implements Serializable {
     private String country;
     private String phoneNumber;
     private String address;
-    private transient Bitmap photo;
+    //private transient Bitmap photo;
+    private int photoPath;
     private List<Mission> missions = new ArrayList<Mission>();
 
     public Long getId() {
@@ -87,12 +86,12 @@ public class Agent implements Serializable {
         this.address = address;
     }
 
-    public Bitmap getPhoto() {
-        return photo;
+    public int getPhotoPath() {
+        return photoPath;
     }
 
-    public void setPhoto(Bitmap photo) {
-        this.photo = photo;
+    public void setPhotoPath(int photoPath) {
+        this.photoPath = photoPath;
     }
 
     public List<Mission> getMissions() {

@@ -24,7 +24,7 @@ public class AgentDAO extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE IF NOT EXISTS Agent (id INTEGER PRIMARY KEY, name TEXT, level TEXT, agency TEXT, " +
-                "website TEXT, country TEXT, phoneNumber TEXT, address TEXT, photo BLOB)";
+                "website TEXT, country TEXT, phoneNumber TEXT, address TEXT, photoPath INTEGER)";
         db.execSQL(sql);
     }
 
@@ -39,9 +39,9 @@ public class AgentDAO extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        agent.getPhoto().compress(Bitmap.CompressFormat.JPEG, 100, bos);
-        byte[] bytes = bos.toByteArray();
+        //ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        //agent.getPhoto().compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        //byte[] bytes = bos.toByteArray();
 
         ContentValues agentData = new ContentValues();
         agentData.put("name", agent.getName());
@@ -51,7 +51,7 @@ public class AgentDAO extends SQLiteOpenHelper {
         agentData.put("country", agent.getCountry());
         agentData.put("phoneNumber", agent.getPhoneNumber());
         agentData.put("address", agent.getAddress());
-        agentData.put("photo", bytes);
+        agentData.put("photoPath", agent.getPhotoPath());
 
         db.insert("Agent", null, agentData);
     }
@@ -75,8 +75,8 @@ public class AgentDAO extends SQLiteOpenHelper {
             agent.setCountry(c.getString(c.getColumnIndex("country")));
             agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
             agent.setAddress(c.getString(c.getColumnIndex("address")));
-            byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
-            agent.setPhoto(BitmapFactory.decodeByteArray(bytes, 0 , bytes.length));
+            //byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
+            agent.setPhotoPath(c.getInt(c.getColumnIndex("photoPath")));
 
             agentList.add(agent);
         }
@@ -104,8 +104,7 @@ public class AgentDAO extends SQLiteOpenHelper {
                 agent.setCountry(c.getString(c.getColumnIndex("country")));
                 agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
                 agent.setAddress(c.getString(c.getColumnIndex("address")));
-                byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
-                agent.setPhoto(BitmapFactory.decodeByteArray(bytes, 0 , bytes.length));
+                agent.setPhotoPath(c.getInt(c.getColumnIndex("photoPath")));
             }
         }
         c.close();
@@ -132,8 +131,7 @@ public class AgentDAO extends SQLiteOpenHelper {
                 agent.setCountry(c.getString(c.getColumnIndex("country")));
                 agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
                 agent.setAddress(c.getString(c.getColumnIndex("address")));
-                byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
-                agent.setPhoto(BitmapFactory.decodeByteArray(bytes, 0, bytes.length));
+                agent.setPhotoPath(c.getInt(c.getColumnIndex("photoPath")));
                 agentList.add(agent);
             }
         }
