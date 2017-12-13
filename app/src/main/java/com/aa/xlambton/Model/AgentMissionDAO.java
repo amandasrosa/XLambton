@@ -72,4 +72,23 @@ public class AgentMissionDAO extends SQLiteOpenHelper {
 
         return agentMissionList;
     }
+
+    public List<Mission> dbSearchMissionsFromAgentById (Context context, Long id) {
+        List<AgentMission> agentMissionList = dbSearch(context);
+        List<Long> missionIdList = new ArrayList<>();
+        for (AgentMission am : agentMissionList) {
+            if (am.getAgent().getId() == id) {
+                missionIdList.add(am.getMission().getId());
+            }
+        }
+        MissionDAO mDao = new MissionDAO(context);
+        List<Mission> missionsFromAgentList = new ArrayList<>();
+        for (Long mId : missionIdList) {
+            Mission mission = mDao.dbSearchById(mId);
+            if (mission != null) {
+                missionsFromAgentList.add(mission);
+            }
+        }
+        return missionsFromAgentList;
+    }
 }

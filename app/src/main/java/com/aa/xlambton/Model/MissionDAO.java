@@ -79,7 +79,7 @@ public class MissionDAO extends SQLiteOpenHelper {
             if (c.getLong(c.getColumnIndex("id")) == id) {
                 mission.setId(c.getLong(c.getColumnIndex("id")));
                 mission.setName(c.getString(c.getColumnIndex("name")));
-                mission.setDateMission(c.getString(c.getColumnIndex("data")));
+                mission.setDateMission(c.getString(c.getColumnIndex("date")));
                 mission.setStatus(c.getString(c.getColumnIndex("status")));
             }
         }

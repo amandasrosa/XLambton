@@ -45,6 +45,7 @@ public class AgentDAO extends SQLiteOpenHelper {
 
         ContentValues agentData = new ContentValues();
         agentData.put("name", agent.getName());
+        agentData.put("level", agent.getAgency());
         agentData.put("agency", agent.getAgency());
         agentData.put("website", agent.getWebsite());
         agentData.put("country", agent.getCountry());

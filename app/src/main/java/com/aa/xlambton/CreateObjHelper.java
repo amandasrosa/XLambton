@@ -27,30 +27,35 @@ public class CreateObjHelper {
         MissionDAO daoMission = new MissionDAO(context);
 
         Mission m1 = new Mission();
+        m1.setId(1L);
         m1.setName("Europe Heat Zone");
         m1.setDateMission("28/03/2016");
         m1.setStatus("Done");
         daoMission.dbInsert(m1);
 
         Mission m2 = new Mission();
+        m2.setId(2L);
         m2.setName("Indian Investigation");
         m2.setDateMission("16/05/2016");
         m2.setStatus("Done");
         daoMission.dbInsert(m2);
 
         Mission m3 = new Mission();
+        m3.setId(3L);
         m3.setName("America Threat");
         m3.setDateMission("03/10/2017");
         m3.setStatus("On going");
         daoMission.dbInsert(m3);
 
         Mission m4 = new Mission();
+        m4.setId(4L);
         m4.setName("South Asia Detection");
         m4.setDateMission("11/12/2017");
         m4.setStatus("On going");
         daoMission.dbInsert(m4);
 
         Mission m5 = new Mission();
+        m5.setId(5L);
         m5.setName("Middle East Searching");
         m5.setDateMission("19/06/2017");
         m5.setStatus("Canceled");
@@ -72,6 +77,7 @@ public class CreateObjHelper {
         Bitmap lowdefbitmap5 = Bitmap.createScaledBitmap(bitmap5,300,300,true);
 
         Agent ag1 = new Agent();
+        ag1.setId(1L);
         ag1.setName("Olivia Brown");
         ag1.setLevel("001");
         ag1.setAgency("AIC");
@@ -83,6 +89,7 @@ public class CreateObjHelper {
         daoAgent.dbInsert(ag1);
 
         Agent ag2 = new Agent();
+        ag2.setId(2L);
         ag2.setName("Thomas Roy");
         ag2.setLevel("002");
         ag2.setAgency("MSD");
@@ -94,6 +101,7 @@ public class CreateObjHelper {
         daoAgent.dbInsert(ag2);
 
         Agent ag3 = new Agent();
+        ag3.setId(3L);
         ag3.setName("Rebecca Lee");
         ag3.setLevel("003");
         ag3.setAgency("BGK");
@@ -105,6 +113,7 @@ public class CreateObjHelper {
         daoAgent.dbInsert(ag3);
 
         Agent ag4 = new Agent();
+        ag4.setId(4L);
         ag4.setName("Samuel Bouchard");
         ag4.setLevel("001");
         ag4.setAgency("AIC");
@@ -116,6 +125,7 @@ public class CreateObjHelper {
         daoAgent.dbInsert(ag4);
 
         Agent ag5 = new Agent();
+        ag5.setId(5L);
         ag5.setName("Logan Gagnon");
         ag5.setLevel("002");
         ag5.setAgency("AIC");

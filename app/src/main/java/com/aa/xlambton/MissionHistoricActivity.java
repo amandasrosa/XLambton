@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.aa.xlambton.Model.AgentMissionDAO;
 import com.aa.xlambton.Model.Mission;
 import com.aa.xlambton.Model.MissionDAO;
 
@@ -19,13 +20,15 @@ public class MissionHistoricActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mission_historic);
 
-        MissionDAO dao = new MissionDAO(this);
-        List<Mission> missions = dao.dbSearch();
-        dao.close();
-
-        HistoricListAdapter adapter = new HistoricListAdapter(this, R.layout.activity_mission_historic, missions);
-        ListView missionList = (ListView) findViewById(R.id.historic_mission_list);
-        missionList.setAdapter(adapter);
+        Long agentId = getIntent().getLongExtra("agentId",0);
+        if (agentId != null && agentId > 0 ){
+            AgentMissionDAO dao = new AgentMissionDAO(this);
+            List<Mission> missions = dao.dbSearchMissionsFromAgentById(this,agentId);
+            dao.close();
+            HistoricListAdapter adapter = new HistoricListAdapter(this, R.layout.activity_mission_historic, missions);
+            ListView missionList = (ListView) findViewById(R.id.historic_mission_list);
+            missionList.setAdapter(adapter);
+        }
     }
 
     @Override

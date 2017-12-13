@@ -74,6 +74,7 @@ public class AgentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AgentProfileActivity.this, MissionHistoricActivity.class);
+                intent.putExtra("agentId", agent.getId());
                 startActivity(intent);
             }
         });
