@@ -8,14 +8,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Username"
-        android:textAlignment="center"/>
+        android:inputType="text"
+        android:textAlignment="center"
+        android:imeOptions="actionNext"
+        android:lines="1"/>
     <EditText
         android:id="@+id/new_user_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:imeOptions="actionGo"/>
     <Button
         android:id="@+id/new_user_register"
         android:layout_width="match_parent"
