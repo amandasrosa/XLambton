@@ -1,7 +1,6 @@
 package com.aa.xlambton;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,7 +31,7 @@ public class MissionUpdateAdapter extends ArrayAdapter {
             TextView label = (TextView) view.findViewById(R.id.mission_update_cell_label);
 
             if (image != null) {
-                image.setImageBitmap(BitmapFactory.decodeFile(path));
+                image.setImageBitmap(BitmapHelper.getScaledBitmap(getContext(), path));
             }
             if (label != null) {
                 File f = new File(path);
