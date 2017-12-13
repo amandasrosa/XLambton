@@ -1,6 +1,7 @@
 package com.aa.xlambton;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,11 @@ public class MissionUpdateAdapter extends ArrayAdapter {
                 File f = new File(path);
                 label.setText(f.getName());
             }
+            /*if (path.selected()) {
+                image.setBackgroundColor(Color.parseColor("#FF6347"));
+            } else {
+                image.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }*/
         }
 
         return view;

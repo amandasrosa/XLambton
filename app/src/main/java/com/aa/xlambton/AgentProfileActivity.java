@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.aa.xlambton.Model.Agent;
 
@@ -43,21 +44,32 @@ public class AgentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String site = agent.getWebsite();
-                if (!site.startsWith("http://")) { site = "http://" + site; }
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
-                startActivity(intent);
+                if (site == null || site.equals("")) {
+                    Toast.makeText(AgentProfileActivity.this,"Cannot open Website. This agent has no website.", Toast.LENGTH_LONG).show();
+                } else {
+                    if (!site.startsWith("http://")) {
+                        site = "http://" + site;
+                    }
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(site));
+                    startActivity(intent);
+                }
             }
         });
 
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ActivityCompat.checkSelfPermission(AgentProfileActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(AgentProfileActivity.this, new String[] {Manifest.permission.CALL_PHONE},123);
-
+                String phone = agent.getPhoneNumber();
+                if (phone == null || phone.equals("")) {
+                    Toast.makeText(AgentProfileActivity.this,"Cannot make call. This agent has no phone number.", Toast.LENGTH_LONG).show();
                 } else {
-                    Intent itemCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel: " + agent.getPhoneNumber()));
-                    startActivity(itemCall);
+                    if (ActivityCompat.checkSelfPermission(AgentProfileActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(AgentProfileActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 123);
+
+                    } else {
+                        Intent itemCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel: " + agent.getPhoneNumber()));
+                        startActivity(itemCall);
+                    }
                 }
             }
         });
@@ -65,8 +77,13 @@ public class AgentProfileActivity extends AppCompatActivity {
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentLocation = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + agent.getAddress()));
-                startActivity(intentLocation);
+                String address = agent.getAddress();
+                if (address == null || address.equals("")) {
+                    Toast.makeText(AgentProfileActivity.this,"Cannot open Maps. This agent has no address.", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intentLocation = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + agent.getAddress()));
+                    startActivity(intentLocation);
+                }
             }
         });
 
@@ -82,8 +99,13 @@ public class AgentProfileActivity extends AppCompatActivity {
         btnSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"));
-                startActivity(intentSms);
+                String phone = agent.getPhoneNumber();
+                if (phone == null || phone.equals("")) {
+                    Toast.makeText(AgentProfileActivity.this,"Cannot open Sms. This agent has no phone number.", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intentSms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"+ phone));
+                    startActivity(intentSms);
+                }
             }
         });
 

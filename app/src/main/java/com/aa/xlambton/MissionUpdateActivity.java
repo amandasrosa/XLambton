@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -45,6 +46,14 @@ public class MissionUpdateActivity extends AppCompatActivity {
         MissionUpdateAdapter adapter = new MissionUpdateAdapter(this, R.layout.activity_mission_update, paths);
         photoGrid = (GridView) findViewById(R.id.mission_update_grid);
         photoGrid.setAdapter(adapter);
+
+        photoGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //paths.get(position).turnSelected();
+                ((MissionUpdateAdapter)photoGrid.getAdapter()).notifyDataSetChanged();
+            }
+        });
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override

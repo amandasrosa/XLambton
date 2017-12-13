@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.aa.xlambton.Model.AgentMissionDAO;
 import com.aa.xlambton.Model.Mission;
@@ -25,9 +26,13 @@ public class MissionHistoricActivity extends AppCompatActivity {
             AgentMissionDAO dao = new AgentMissionDAO(this);
             List<Mission> missions = dao.dbSearchMissionsFromAgentById(this,agentId);
             dao.close();
-            HistoricListAdapter adapter = new HistoricListAdapter(this, R.layout.activity_mission_historic, missions);
-            ListView missionList = (ListView) findViewById(R.id.historic_mission_list);
-            missionList.setAdapter(adapter);
+            if (missions.isEmpty() || missions == null) {
+                Toast.makeText(MissionHistoricActivity.this,"There are no missions related to this agent.", Toast.LENGTH_LONG).show();
+            } else {
+                HistoricListAdapter adapter = new HistoricListAdapter(this, R.layout.activity_mission_historic, missions);
+                ListView missionList = (ListView) findViewById(R.id.historic_mission_list);
+                missionList.setAdapter(adapter);
+            }
         }
     }
 

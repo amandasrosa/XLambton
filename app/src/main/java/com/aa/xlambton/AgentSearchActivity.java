@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aa.xlambton.Model.Agent;
 import com.aa.xlambton.Model.AgentDAO;
@@ -75,9 +76,13 @@ public class AgentSearchActivity extends AppCompatActivity {
         agents = dao.dbSearchByName(name);
         AgentListAdapter adapter = (AgentListAdapter) agentList.getAdapter();
         adapter.clear();
-        adapter.addAll(agents);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(agentName.getWindowToken(), 0);
+        if (agents.isEmpty() || agents == null) {
+            Toast.makeText(AgentSearchActivity.this,"Search returned no results.", Toast.LENGTH_LONG).show();
+        } else {
+            adapter.addAll(agents);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(agentName.getWindowToken(), 0);
+        }
     }
 
     @Override
