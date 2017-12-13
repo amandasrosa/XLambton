@@ -44,10 +44,7 @@ public class AgentListAdapter extends ArrayAdapter {
             TextView level = (TextView) view.findViewById(R.id.list_cell_level);
 
             if (photo != null) {
-                Bitmap bitmap = BitmapFactory.decodeResource(view.getResources(), agent.getPhotoPath());
-                Bitmap lowdefbitmap = Bitmap.createScaledBitmap(bitmap,300,300,true);
-
-                photo.setImageBitmap(lowdefbitmap);
+                photo.setImageBitmap(BitmapHelper.getScaledBitmap(getContext(), agent.getPhotoPath()));
             }
             if (name != null) {
                 name.setText(agent.getName());

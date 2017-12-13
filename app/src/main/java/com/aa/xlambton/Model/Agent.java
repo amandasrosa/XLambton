@@ -18,8 +18,7 @@ public class Agent implements Serializable {
     private String country;
     private String phoneNumber;
     private String address;
-    //private transient Bitmap photo;
-    private int photoPath;
+    private String photoPath;
     private List<Mission> missions = new ArrayList<Mission>();
 
     public Long getId() {
@@ -86,11 +85,11 @@ public class Agent implements Serializable {
         this.address = address;
     }
 
-    public int getPhotoPath() {
+    public String getPhotoPath() {
         return photoPath;
     }
 
-    public void setPhotoPath(int photoPath) {
+    public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
     }
 

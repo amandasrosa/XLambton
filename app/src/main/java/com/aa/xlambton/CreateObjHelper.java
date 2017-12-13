@@ -3,9 +3,6 @@ package com.aa.xlambton;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.support.v4.content.ContextCompat;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,14 +64,11 @@ public class CreateObjHelper {
 
         AgentDAO daoAgent = new AgentDAO(context);
 
-        //Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.agent1) ;
-        //Bitmap lowdefbitmap1 = Bitmap.createScaledBitmap(bitmap1,300,300,true);
-
-        int photoAg1 = R.drawable.agent1;
-        int photoAg2 = R.drawable.agent2;
-        int photoAg3 = R.drawable.agent3;
-        int photoAg4 = R.drawable.agent4;
-        int photoAg5 = R.drawable.agent5;
+        String photoAg1 = convertDrawableToBitmap(context, R.drawable.agent1);
+        String photoAg2 = convertDrawableToBitmap(context, R.drawable.agent2);
+        String photoAg3 = convertDrawableToBitmap(context, R.drawable.agent3);
+        String photoAg4 = convertDrawableToBitmap(context, R.drawable.agent4);
+        String photoAg5 = convertDrawableToBitmap(context, R.drawable.agent5);
 
         System.out.println("photoag1 " + photoAg1);
         Agent ag1 = new Agent();
@@ -204,7 +198,7 @@ public class CreateObjHelper {
         daoAgMi.close();
     }
 
-    public static void fillForm(Context context,AgentProfileActivity activity, Agent agent) {
+    public static void fillForm(Context context, AgentProfileActivity activity, Agent agent) {
 
         ImageView fieldPhoto = (ImageView)activity.findViewById(R.id.agent_profile_photo);
         TextView fieldName = (TextView)activity.findViewById(R.id.agent_profile_name);
@@ -215,10 +209,7 @@ public class CreateObjHelper {
         TextView fieldPhone = (TextView)activity.findViewById(R.id.agent_profile_phone_number);
         TextView fieldAddress = (TextView)activity.findViewById(R.id.agent_profile_address);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), agent.getPhotoPath());
-        Bitmap lowdefbitmap = Bitmap.createScaledBitmap(bitmap,300,300,true);
-
-        fieldPhoto.setImageBitmap(lowdefbitmap);
+        fieldPhoto.setImageBitmap(BitmapHelper.getScaledBitmap(context, agent.getPhotoPath()));
         fieldPhoto.setScaleType(ImageView.ScaleType.FIT_XY);
         fieldName.setText(agent.getName());
         fieldLevel.setText(agent.getLevel());
@@ -228,5 +219,12 @@ public class CreateObjHelper {
         fieldPhone.setText(agent.getPhoneNumber());
         fieldAddress.setText(agent.getAddress());
 
+    }
+
+    private static String convertDrawableToBitmap(Context context, int id) {
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id) ;
+        String path = BitmapHelper.saveBitmapInDisk(context, bitmap, "image" + id + ".jpg");
+        bitmap.recycle();
+        return path;
     }
 }

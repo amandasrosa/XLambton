@@ -5,10 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class AgentDAO extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE IF NOT EXISTS Agent (id INTEGER PRIMARY KEY, name TEXT, level TEXT, agency TEXT, " +
-                "website TEXT, country TEXT, phoneNumber TEXT, address TEXT, photoPath INTEGER)";
+                "website TEXT, country TEXT, phoneNumber TEXT, address TEXT, photoPath TEXT)";
         db.execSQL(sql);
     }
 
@@ -75,8 +72,7 @@ public class AgentDAO extends SQLiteOpenHelper {
             agent.setCountry(c.getString(c.getColumnIndex("country")));
             agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
             agent.setAddress(c.getString(c.getColumnIndex("address")));
-            //byte[] bytes = c.getBlob(c.getColumnIndex("photo"));
-            agent.setPhotoPath(c.getInt(c.getColumnIndex("photoPath")));
+            agent.setPhotoPath(c.getString(c.getColumnIndex("photoPath")));
 
             agentList.add(agent);
         }
@@ -104,7 +100,7 @@ public class AgentDAO extends SQLiteOpenHelper {
                 agent.setCountry(c.getString(c.getColumnIndex("country")));
                 agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
                 agent.setAddress(c.getString(c.getColumnIndex("address")));
-                agent.setPhotoPath(c.getInt(c.getColumnIndex("photoPath")));
+                agent.setPhotoPath(c.getString(c.getColumnIndex("photoPath")));
             }
         }
         c.close();
@@ -131,7 +127,7 @@ public class AgentDAO extends SQLiteOpenHelper {
                 agent.setCountry(c.getString(c.getColumnIndex("country")));
                 agent.setPhoneNumber(c.getString(c.getColumnIndex("phoneNumber")));
                 agent.setAddress(c.getString(c.getColumnIndex("address")));
-                agent.setPhotoPath(c.getInt(c.getColumnIndex("photoPath")));
+                agent.setPhotoPath(c.getString(c.getColumnIndex("photoPath")));
                 agentList.add(agent);
             }
         }
