@@ -21,11 +21,7 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MissionUpdateActivity extends AppCompatActivity {
@@ -50,7 +46,6 @@ public class MissionUpdateActivity extends AppCompatActivity {
         photoGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //paths.get(position).turnSelected();
                 ((MissionUpdateAdapter)photoGrid.getAdapter()).notifyDataSetChanged();
             }
         });
@@ -77,7 +72,17 @@ public class MissionUpdateActivity extends AppCompatActivity {
         btnSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentSms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"));
+                ArrayList<Uri> uris = new ArrayList<>();
+                for(String path: paths) {
+                    File filePhoto = new File(path);
+                    uris.add(FileProvider.getUriForFile(MissionUpdateActivity.this,
+                            BuildConfig.APPLICATION_ID, filePhoto));
+                }
+
+                Intent intentSms = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                intentSms.setType("image/*");
+                intentSms.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+                intentSms.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 startActivity(intentSms);
             }
         });
