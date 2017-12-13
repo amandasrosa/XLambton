@@ -27,6 +27,7 @@ public class MissionUpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mission_update);
 
         Button btnCamera = (Button)findViewById(R.id.mission_update_button_camera);
+        Button btnSms = (Button)findViewById(R.id.mission_update_button_sms);
 
         paths = new ArrayList<>();
         MissionUpdateAdapter adapter = new MissionUpdateAdapter(this, R.layout.activity_mission_update, paths);
@@ -49,6 +50,14 @@ public class MissionUpdateActivity extends AppCompatActivity {
                         startActivityForResult(intentCamera, CAMERA_CODE);
                     }
                 }
+            }
+        });
+
+        btnSms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"));
+                startActivity(intentSms);
             }
         });
     }
