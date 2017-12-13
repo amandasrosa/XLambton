@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,6 +51,7 @@ public class MissionUpdateActivity extends AppCompatActivity {
                 ((MissionUpdateAdapter)photoGrid.getAdapter()).notifyDataSetChanged();
             }
         });
+        registerForContextMenu(photoGrid);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +107,24 @@ public class MissionUpdateActivity extends AppCompatActivity {
                 System.out.println("Null bitmap at " + dirAppPhoto);
             }
         }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        MenuItem delete = menu.add("Delete");
+
+        delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                MissionUpdateAdapter adapter = (MissionUpdateAdapter) photoGrid.getAdapter();
+                adapter.remove(photoGrid.getItemAtPosition(info.position));
+                Toast.makeText(MissionUpdateActivity.this,"Photo deleted", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        super.onCreateContextMenu(menu,v,menuInfo);
     }
 
     @Override
