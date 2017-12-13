@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +18,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.aa.xlambton.Model.Agent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,18 +36,20 @@ public class MissionUpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mission_update);
 
-        Button btnCamera = (Button)findViewById(R.id.mission_update_button_camera);
-        Button btnSms = (Button)findViewById(R.id.mission_update_button_sms);
+        final Agent agent = (Agent) getIntent().getSerializableExtra("agent");
+
+        Button btnCamera = (Button) findViewById(R.id.mission_update_button_camera);
+        Button btnSms = (Button) findViewById(R.id.mission_update_button_sms);
 
         paths = new ArrayList<>();
         MissionUpdateAdapter adapter = new MissionUpdateAdapter(this, R.layout.activity_mission_update, paths);
-        photoGrid = (GridView) findViewById(R.id.mission_update_grid);
+        photoGrid = findViewById(R.id.mission_update_grid);
         photoGrid.setAdapter(adapter);
 
         photoGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ((MissionUpdateAdapter)photoGrid.getAdapter()).notifyDataSetChanged();
+                ((MissionUpdateAdapter) photoGrid.getAdapter()).notifyDataSetChanged();
             }
         });
         registerForContextMenu(photoGrid);
@@ -75,8 +76,13 @@ public class MissionUpdateActivity extends AppCompatActivity {
         btnSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String phone = agent.getPhoneNumber();
                 if (paths.isEmpty()) {
-                    Toast.makeText(MissionUpdateActivity.this,"There are no photos to be sent.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MissionUpdateActivity.this, "There are no photos to be sent.",
+                            Toast.LENGTH_SHORT).show();
+                } else if (phone == null || phone.equals("")) {
+                    Toast.makeText(MissionUpdateActivity.this, "Cannot send photos. This agent has no phone number.",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     ArrayList<Uri> uris = new ArrayList<>();
                     for (String path : paths) {
@@ -86,6 +92,7 @@ public class MissionUpdateActivity extends AppCompatActivity {
                     }
 
                     Intent intentSms = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                    intentSms.putExtra("address", phone);
                     intentSms.setType("image/*");
                     intentSms.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
                     intentSms.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -93,6 +100,7 @@ public class MissionUpdateActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -102,7 +110,7 @@ public class MissionUpdateActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeFile(dirAppPhoto);
             if (bitmap != null) {
                 paths.add(dirAppPhoto);
-                ((MissionUpdateAdapter)photoGrid.getAdapter()).notifyDataSetChanged();
+                ((MissionUpdateAdapter) photoGrid.getAdapter()).notifyDataSetChanged();
             } else {
                 System.out.println("Null bitmap at " + dirAppPhoto);
             }
@@ -119,12 +127,12 @@ public class MissionUpdateActivity extends AppCompatActivity {
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
                 MissionUpdateAdapter adapter = (MissionUpdateAdapter) photoGrid.getAdapter();
                 adapter.remove(photoGrid.getItemAtPosition(info.position));
-                Toast.makeText(MissionUpdateActivity.this,"Photo deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MissionUpdateActivity.this, "Photo deleted", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
 
-        super.onCreateContextMenu(menu,v,menuInfo);
+        super.onCreateContextMenu(menu, v, menuInfo);
     }
 
     @Override

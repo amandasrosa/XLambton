@@ -27,25 +27,26 @@ public class AgentProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agent_profile);
 
-        final Agent agent = (Agent)getIntent().getSerializableExtra("agent");
+        final Agent agent = (Agent) getIntent().getSerializableExtra("agent");
 
         if (agent != null) {
-            CreateObjHelper.fillForm(this,this, agent);
+            CreateObjHelper.fillForm(this, this, agent);
         }
 
-        Button btnWebsite = (Button)findViewById(R.id.agent_profile_button_website);
-        Button btnCall = (Button)findViewById(R.id.agent_profile_button_call);
-        Button btnLocation = (Button)findViewById(R.id.agent_profile_button_location);
-        Button btnInfo = (Button)findViewById(R.id.agent_profile_button_info);
-        Button btnSms = (Button)findViewById(R.id.agent_profile_button_sms);
-        Button btnCamera = (Button)findViewById(R.id.agent_profile_button_camera);
+        Button btnWebsite = (Button) findViewById(R.id.agent_profile_button_website);
+        Button btnCall = (Button) findViewById(R.id.agent_profile_button_call);
+        Button btnLocation = (Button) findViewById(R.id.agent_profile_button_location);
+        Button btnInfo = (Button) findViewById(R.id.agent_profile_button_info);
+        Button btnSms = (Button) findViewById(R.id.agent_profile_button_sms);
+        Button btnCamera = (Button) findViewById(R.id.agent_profile_button_camera);
 
         btnWebsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String site = agent.getWebsite();
                 if (site == null || site.equals("")) {
-                    Toast.makeText(AgentProfileActivity.this,"Cannot open Website. This agent has no website.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AgentProfileActivity.this, "Cannot open Website. This agent has no website.",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     if (!site.startsWith("http://")) {
                         site = "http://" + site;
@@ -61,10 +62,13 @@ public class AgentProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String phone = agent.getPhoneNumber();
                 if (phone == null || phone.equals("")) {
-                    Toast.makeText(AgentProfileActivity.this,"Cannot make call. This agent has no phone number.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AgentProfileActivity.this, "Cannot make call. This agent has no phone number.",
+                            Toast.LENGTH_LONG).show();
                 } else {
-                    if (ActivityCompat.checkSelfPermission(AgentProfileActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(AgentProfileActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 123);
+                    if (ActivityCompat.checkSelfPermission(AgentProfileActivity.this,
+                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(AgentProfileActivity.this,
+                                new String[]{Manifest.permission.CALL_PHONE}, 123);
 
                     } else {
                         Intent itemCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel: " + agent.getPhoneNumber()));
@@ -79,7 +83,8 @@ public class AgentProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String address = agent.getAddress();
                 if (address == null || address.equals("")) {
-                    Toast.makeText(AgentProfileActivity.this,"Cannot open Maps. This agent has no address.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AgentProfileActivity.this, "Cannot open Maps. This agent has no address.",
+                            Toast.LENGTH_LONG).show();
                 } else {
                     Intent intentLocation = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + agent.getAddress()));
                     startActivity(intentLocation);
@@ -101,9 +106,10 @@ public class AgentProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String phone = agent.getPhoneNumber();
                 if (phone == null || phone.equals("")) {
-                    Toast.makeText(AgentProfileActivity.this,"Cannot open Sms. This agent has no phone number.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AgentProfileActivity.this, "Cannot open Sms. This agent has no phone number.",
+                            Toast.LENGTH_LONG).show();
                 } else {
-                    Intent intentSms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"+ phone));
+                    Intent intentSms = new Intent(Intent.ACTION_VIEW, Uri.parse("sms:" + phone));
                     startActivity(intentSms);
                 }
             }
@@ -113,6 +119,7 @@ public class AgentProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AgentProfileActivity.this, MissionUpdateActivity.class);
+                intent.putExtra("agent", agent);
                 startActivity(intent);
             }
         });
