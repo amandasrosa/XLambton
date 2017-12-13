@@ -8,6 +8,7 @@
         android:id="@+id/mission_update_cell_image"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:padding="8dp"
         android:scaleType="centerInside"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/secret_agent" />
