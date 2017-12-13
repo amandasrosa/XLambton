@@ -26,7 +26,7 @@ public class AgentListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agent_list);
 
-        agentList = (ListView)findViewById(R.id.agent_list);
+        agentList = (ListView) findViewById(R.id.agent_list);
         registerForContextMenu(agentList);
 
         agentList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -79,14 +79,15 @@ public class AgentListActivity extends AppCompatActivity {
                 dao.dbDelete(agent);
                 dao.close();
 
-                Toast.makeText(AgentListActivity.this,"Delete agent " + agent.getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AgentListActivity.this, "Agent " + agent.getName() + " deleted",
+                        Toast.LENGTH_SHORT).show();
 
                 loadAgentsList();
                 return false;
             }
         });
 
-        super.onCreateContextMenu(menu,v,menuInfo);
+        super.onCreateContextMenu(menu, v, menuInfo);
     }
 
     @Override
