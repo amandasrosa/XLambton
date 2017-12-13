@@ -3,6 +3,7 @@ package com.aa.xlambton;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -200,14 +201,14 @@ public class CreateObjHelper {
 
     public static void fillForm(Context context, AgentProfileActivity activity, Agent agent) {
 
-        ImageView fieldPhoto = (ImageView)activity.findViewById(R.id.agent_profile_photo);
-        TextView fieldName = (TextView)activity.findViewById(R.id.agent_profile_name);
-        TextView fieldLevel = (TextView)activity.findViewById(R.id.agent_profile_level);
-        TextView fieldAgency = (TextView)activity.findViewById(R.id.agent_profile_agency);
-        TextView fieldSite = (TextView)activity.findViewById(R.id.agent_profile_website);
-        TextView fieldCountry = (TextView)activity.findViewById(R.id.agent_profile_country);
-        TextView fieldPhone = (TextView)activity.findViewById(R.id.agent_profile_phone_number);
-        TextView fieldAddress = (TextView)activity.findViewById(R.id.agent_profile_address);
+        ImageView fieldPhoto = (ImageView) activity.findViewById(R.id.agent_profile_photo);
+        TextView fieldName = (TextView) activity.findViewById(R.id.agent_profile_name);
+        TextView fieldLevel = (TextView) activity.findViewById(R.id.agent_profile_level);
+        TextView fieldAgency = (TextView) activity.findViewById(R.id.agent_profile_agency);
+        TextView fieldSite = (TextView) activity.findViewById(R.id.agent_profile_website);
+        TextView fieldCountry = (TextView) activity.findViewById(R.id.agent_profile_country);
+        TextView fieldPhone = (TextView) activity.findViewById(R.id.agent_profile_phone_number);
+        TextView fieldAddress = (TextView) activity.findViewById(R.id.agent_profile_address);
 
         fieldPhoto.setImageBitmap(BitmapHelper.getScaledBitmap(context, agent.getPhotoPath()));
         fieldPhoto.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -221,8 +222,31 @@ public class CreateObjHelper {
 
     }
 
+    public static Agent createNewAgent(NewAgentActivity activity, String photoPath) {
+        Agent agent = new Agent();
+
+        String name = ((EditText) activity.findViewById(R.id.new_agent_name)).getText().toString();
+        String level = ((EditText) activity.findViewById(R.id.new_agent_level)).getText().toString();
+        String agency = ((EditText) activity.findViewById(R.id.new_agent_agency)).getText().toString();
+        String site = ((EditText) activity.findViewById(R.id.new_agent_website)).getText().toString();
+        String country = ((EditText) activity.findViewById(R.id.new_agent_country)).getText().toString();
+        String phone = ((EditText) activity.findViewById(R.id.new_agent_phone_number)).getText().toString();
+        String address = ((EditText) activity.findViewById(R.id.new_agent_address)).getText().toString();
+
+        agent.setPhotoPath(photoPath);
+        agent.setName(name);
+        agent.setLevel(level);
+        agent.setAgency(agency);
+        agent.setWebsite(site);
+        agent.setCountry(country);
+        agent.setPhoneNumber(phone);
+        agent.setAddress(address);
+
+        return agent;
+    }
+
     private static String convertDrawableToBitmap(Context context, int id) {
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id) ;
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), id);
         String path = BitmapHelper.saveBitmapInDisk(context, bitmap, "image" + id + ".jpg");
         bitmap.recycle();
         return path;
