@@ -10,6 +10,7 @@ import android.os.Build;
 import android.support.v4.content.FileProvider;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -17,6 +18,20 @@ import java.io.IOException;
  */
 
 public class BitmapHelper {
+    public static String saveBitmapInDisk(Context context, Bitmap bitmap, String fileName) {
+        String path = context.getExternalFilesDir(null) + "/" + fileName;
+        File file = new File(path);
+        try {
+            FileOutputStream fOut = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+            fOut.flush();
+            fOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return path;
+    }
+
     public static Bitmap getScaledBitmap(Context context, String path) {
         // Get the dimensions of the View
         int targetW = 300;
