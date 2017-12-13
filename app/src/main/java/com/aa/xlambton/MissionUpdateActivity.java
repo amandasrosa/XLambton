@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -72,18 +73,22 @@ public class MissionUpdateActivity extends AppCompatActivity {
         btnSms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Uri> uris = new ArrayList<>();
-                for(String path: paths) {
-                    File filePhoto = new File(path);
-                    uris.add(FileProvider.getUriForFile(MissionUpdateActivity.this,
-                            BuildConfig.APPLICATION_ID, filePhoto));
-                }
+                if (paths.isEmpty()) {
+                    Toast.makeText(MissionUpdateActivity.this,"There are no photos to be sent.", Toast.LENGTH_LONG).show();
+                } else {
+                    ArrayList<Uri> uris = new ArrayList<>();
+                    for (String path : paths) {
+                        File filePhoto = new File(path);
+                        uris.add(FileProvider.getUriForFile(MissionUpdateActivity.this,
+                                BuildConfig.APPLICATION_ID, filePhoto));
+                    }
 
-                Intent intentSms = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                intentSms.setType("image/*");
-                intentSms.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-                intentSms.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                startActivity(intentSms);
+                    Intent intentSms = new Intent(Intent.ACTION_SEND_MULTIPLE);
+                    intentSms.setType("image/*");
+                    intentSms.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+                    intentSms.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    startActivity(intentSms);
+                }
             }
         });
     }
