@@ -3,6 +3,7 @@ package com.aa.xlambton;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -201,7 +202,23 @@ public class CreateObjHelper {
 
     public static void fillForm(Context context, AgentProfileActivity activity, Agent agent) {
 
-        ImageView fieldPhoto = (ImageView) activity.findViewById(R.id.agent_profile_photo);
+        final ImageView fieldPhoto = (ImageView) activity.findViewById(R.id.agent_profile_photo);
+        final Context c = context;
+        final String path = agent.getPhotoPath();
+        fieldPhoto.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    fieldPhoto.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+                else {
+                    fieldPhoto.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+
+                fieldPhoto.setImageBitmap(BitmapHelper.getScaledBitmap(c, path, fieldPhoto));
+
+            }
+        });
         TextView fieldName = (TextView) activity.findViewById(R.id.agent_profile_name);
         TextView fieldLevel = (TextView) activity.findViewById(R.id.agent_profile_level);
         TextView fieldAgency = (TextView) activity.findViewById(R.id.agent_profile_agency);
@@ -210,9 +227,7 @@ public class CreateObjHelper {
         TextView fieldPhone = (TextView) activity.findViewById(R.id.agent_profile_phone_number);
         TextView fieldAddress = (TextView) activity.findViewById(R.id.agent_profile_address);
 
-        fieldPhoto.setImageBitmap(BitmapHelper.getScaledBitmap(context, agent.getPhotoPath()));
         fieldPhoto.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        fieldPhoto.setAdjustViewBounds(true);
         fieldName.setText(agent.getName());
         fieldLevel.setText(agent.getLevel());
         fieldAgency.setText(agent.getAgency());
