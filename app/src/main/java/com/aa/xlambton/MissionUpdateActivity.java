@@ -1,7 +1,13 @@
 package com.aa.xlambton;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +20,17 @@ import android.widget.Button;
 import android.widget.GridView;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MissionUpdateActivity extends AppCompatActivity {
+    String dirAppPhoto;
     List<String> paths;
+    GridView photoGrid;
     private static final int CAMERA_CODE = 990;
 
     @Override
@@ -31,13 +43,13 @@ public class MissionUpdateActivity extends AppCompatActivity {
 
         paths = new ArrayList<>();
         MissionUpdateAdapter adapter = new MissionUpdateAdapter(this, R.layout.activity_mission_update, paths);
-        GridView photoGrid = (GridView) findViewById(R.id.mission_update_grid);
+        photoGrid = (GridView) findViewById(R.id.mission_update_grid);
         photoGrid.setAdapter(adapter);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String dirAppPhoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
+                dirAppPhoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
                 File filePhoto = new File(dirAppPhoto);
 
                 if (filePhoto != null) {
@@ -60,6 +72,20 @@ public class MissionUpdateActivity extends AppCompatActivity {
                 startActivity(intentSms);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_CODE) {
+            Bitmap bitmap = BitmapFactory.decodeFile(dirAppPhoto);
+            if (bitmap != null) {
+                paths.add(dirAppPhoto);
+                ((MissionUpdateAdapter)photoGrid.getAdapter()).notifyDataSetChanged();
+            } else {
+                System.out.println("Null bitmap at " + dirAppPhoto);
+            }
+        }
     }
 
     @Override
