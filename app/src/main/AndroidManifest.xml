@@ -3,6 +3,7 @@
     package="com.aa.xlambton">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity" android:label="XLAMBTON">
+        <activity android:name=".LoginActivity" android:label="XLAMBTON"
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,21 +21,29 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewUserActivity"
-            android:label="New User" />
+            android:label="New User"
+            android:screenOrientation="nosensor" />
         <activity android:name=".MenuActivity"
-            android:label="XLAMBTON" />
+            android:label="XLAMBTON"
+            android:screenOrientation="nosensor" />
         <activity android:name=".AgentListActivity"
-            android:label="Agent List" />
+            android:label="Agent List"
+            android:screenOrientation="nosensor" />
         <activity android:name=".AgentProfileActivity"
-            android:label="Agent Profile" />
+            android:label="Agent Profile"
+            android:screenOrientation="nosensor" />
         <activity android:name=".MissionHistoricActivity"
-            android:label="Historic" />
+            android:label="Historic"
+            android:screenOrientation="nosensor" />
         <activity android:name=".AgentSearchActivity"
-            android:label="Agent Search" />
+            android:label="Agent Search"
+            android:screenOrientation="nosensor" />
         <activity android:name=".NewAgentActivity"
-            android:label="New Agent" />
+            android:label="New Agent"
+            android:screenOrientation="nosensor" />
         <activity android:name=".MissionUpdateActivity"
-            android:label="Mission Update" />
+            android:label="Mission Update"
+            android:screenOrientation="nosensor" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
