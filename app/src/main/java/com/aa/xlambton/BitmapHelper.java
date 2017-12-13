@@ -8,6 +8,7 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
+import android.view.View;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,9 +34,16 @@ public class BitmapHelper {
     }
 
     public static Bitmap getScaledBitmap(Context context, String path) {
-        // Get the dimensions of the View
-        int targetW = 300;
-        int targetH = 300;
+        return getScaledBitmap(context, path, 300, 300);
+    }
+
+    public static Bitmap getScaledBitmap(Context context, String path, View view) {
+        return getScaledBitmap(context, path, view.getWidth(), view.getHeight());
+    }
+
+    public static Bitmap getScaledBitmap(Context context, String path, int viewWidth, int viewHeight) {
+        viewWidth = viewWidth == 0 ? 300 : viewWidth;
+        viewHeight = viewWidth == 0 ? 300 : viewHeight;
 
         // Get the dimensions of the bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
@@ -45,7 +53,7 @@ public class BitmapHelper {
         int photoH = bmOptions.outHeight;
 
         // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+        int scaleFactor = Math.min(photoW/viewWidth, photoH/viewHeight);
 
         // Decode the image file into a Bitmap sized to fill the View
         bmOptions.inJustDecodeBounds = false;
