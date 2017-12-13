@@ -11,7 +11,7 @@
         android:padding="8dp"
         android:scaleType="centerInside"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/secret_agent" />
+        android:background="@drawable/secret_agent" />
     <TextView
         android:id="@+id/mission_update_cell_label"
         android:text="Label"
